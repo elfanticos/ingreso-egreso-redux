@@ -1,0 +1,13 @@
+mat-card
+    mat-card-header
+        mat-card-title Login
+    form([formGroup]="formLogin", (ngSubmit)="login()")
+        mat-card-content
+                mat-form-field
+                    mat-label Usuario
+                    input(matInput, placeholder="", formControlName="usuario", name="usuario")
+                mat-form-field
+                    mat-label Contraseña
+                    input(matInput, placeholder="", formControlName="clave", name="clave")
+        mat-card-actions
+            button(mat-button, color="primary", [disabled]="formLogin.invalid") Ingresar
