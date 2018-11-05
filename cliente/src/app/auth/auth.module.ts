@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 /**Angular material */
 import {
   MatButtonModule,
@@ -19,6 +20,7 @@ import { AppRegisterComponent } from './register/register.component';
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
