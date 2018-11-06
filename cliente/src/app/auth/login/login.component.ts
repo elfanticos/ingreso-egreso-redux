@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Appstate } from './../../app.reducer';
+import { Store } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 /**SERVICIOS */
 import { AuthService } from './../auth.service';
-import { HttpParams } from '@angular/common/http';
+import { User } from '../user.model';
 @Component({
     selector    : 'app-login',
     templateUrl : './login.component.html',
@@ -10,15 +12,23 @@ import { HttpParams } from '@angular/common/http';
     providers   : [AuthService]
 })
 
-export class AppLoginComponent  {
+export class AppLoginComponent implements OnInit {
     formLogin:FormGroup;
     constructor(
         private _formBuilder : FormBuilder,
-        private _authService : AuthService
+        private _authService : AuthService,
+        private _store : Store<Appstate>
     ) {
         this.formLogin = this._formBuilder.group({
             'usuario' : [null, [Validators.required, Validators.maxLength(30)]],
             'clave'   : [null, [Validators.required,Validators.maxLength(10)]]
+        });
+    }
+
+    ngOnInit():void {
+        this._store.select('auth')
+        .subscribe(user => {
+            console.log(user);
         });
     }
 
@@ -27,13 +37,6 @@ export class AppLoginComponent  {
 
 
     login():void {
-        let params = new HttpParams()
-            .set('usuario' , this.usuario.value)
-            .set('clave'   , this.clave.value)
-        this._authService.login(params).subscribe(result => {
-            console.log(result);
-        },err => {
-            console.log(err);
-        });
+        this._authService.login(this.usuario.value, this.clave.value);
     }
 }

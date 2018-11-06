@@ -2,7 +2,12 @@
 var db = require('../../index');
 function login(data) {
     return new Promise((resolve,reject) => {
-        let sql = `SELECT *
+        let sql = `SELECT id_persona,
+                          nom_persona,
+                          ape_pate_pers,
+                          ape_mate_pers,
+                          nro_documento,
+                          foto_persona
                      FROM persona
                     WHERE usuario = UNACCENT(LOWER($1))
                       AND clave   = $2`;
