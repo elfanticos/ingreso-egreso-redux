@@ -4,7 +4,11 @@ const express    = require('express'),
 	  cors       = require('cors'),
 	  app        = express();
 
-
+/**Configuraciones */
+require('./config/constant');
+require('./config/authenticated');
+/**JWT */
+global.jwt = require('jwt-simple');
 //ROUTES
 var r_auth    = require("./modulos/auth/r_auth");
 

@@ -1,14 +1,17 @@
 'use strict'
 
-const m_auth = require('./m_auth');
+const m_auth      = require('./m_auth'),
+      jwt_service = require('../../config/jwt');
 
 async function login(req,res) {
     try {
         let data_req = req.query;
-        let data = await m_auth.login(data_req);
-        if (!data)
+        let user = await m_auth.login(data_req);
+        if (!user) {
             throw {status : 400, msj : 'Usuario o clave incorrecta'};
-            res.status(200).send(data);
+        }
+        let token = jwt_service.createToken(user);
+        res.status(200).send({user, token});
     } catch (err) {
         if(err.status) {
             res.status(err.status).send(err);
@@ -19,6 +22,26 @@ async function login(req,res) {
     }
 }
 
+async function validatorToken(req, res) {
+    try {
+        let token = req.query.token;
+        if (!token) {
+            throw {status : 400, msj : 'Acción no permitida'};
+        }
+        token = jwt.decode(token, JWT_KEY);
+        console.log(token);
+        res.status(200).send({});
+    } catch (err) {
+        if(err.status) {
+            res.status(err.status).send(err);
+        } else {
+            console.log(err);
+            res.status(500).send({msj : 'Hubo un error'});
+        }  
+    }
+}
+
 module.exports = {
-    login
+    login,
+    validatorToken
 };

@@ -6,5 +6,6 @@ const express    = require('express'),
 
 router
 	.get('/login', c_auth.login)
+	.get('/validatorToken', global.ensureAuth, c_auth.validatorToken)
 
 module.exports = router;
