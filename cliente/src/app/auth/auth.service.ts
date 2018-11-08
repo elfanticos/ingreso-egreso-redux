@@ -27,12 +27,25 @@ export class AuthService {
             .set('clave'   , clave);
         /**Activar carga */
         this._store.dispatch(new ActivarLoadingAction());
-        this._httpClient.get(`${this.url}login`, {params : params}).subscribe((result:User) => {
+        this._httpClient.get(`${this.url}login`, {params : params}).subscribe((result:any) => {
             /**Desactivar carga y redireccionar al dashboard */
             this._store.dispatch(new DesactivarLoadingAction());
             /**Cargar datos de usuario en session */
-            this._store.dispatch(new SetUserAction(result));
+            this._store.dispatch(new SetUserAction(result.user));
+            /**Guardar token en local*/
+            localStorage.setItem('token', result.token);
             this._router.navigate(['/']);
+        },err => {
+            /**Desactivar carga y redireccionar al dashboard */
+            this._store.dispatch(new DesactivarLoadingAction());
+        });
+    }
+
+    validatorToken():void {
+        let params = new HttpParams()
+            .set('token' , localStorage.getItem('token'));
+        this._httpClient.get(`${this.url}validatorToken`, {params : params}).subscribe((result:any) => {
+            console.log(result);
         },err => {
             /**Desactivar carga y redireccionar al dashboard */
             this._store.dispatch(new DesactivarLoadingAction());

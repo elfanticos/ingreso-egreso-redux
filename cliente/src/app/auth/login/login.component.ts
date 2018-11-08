@@ -26,10 +26,10 @@ export class AppLoginComponent implements OnInit {
     }
 
     ngOnInit():void {
-        this._store.select('auth')
-        .subscribe(user => {
-            console.log(user);
-        });
+        // this._store.select('auth')
+        // .subscribe(user => {
+        //     console.log(user);
+        // });
     }
 
     get usuario() { return this.formLogin.controls['usuario'];}
