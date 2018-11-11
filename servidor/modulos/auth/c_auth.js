@@ -16,7 +16,6 @@ async function login(req,res) {
         if(err.status) {
             res.status(err.status).send(err);
         } else {
-            console.log(err);
             res.status(500).send({msj : 'Hubo un error'});
         }
     }
@@ -28,14 +27,11 @@ async function validatorToken(req, res) {
         if (!token) {
             throw {status : 400, msj : 'Acción no permitida'};
         }
-        token = jwt.decode(token, JWT_KEY);
-        console.log(token);
-        res.status(200).send({});
+        res.status(200).send({user : jwt.decode(token, JWT_KEY) , token});
     } catch (err) {
         if(err.status) {
             res.status(err.status).send(err);
         } else {
-            console.log(err);
             res.status(500).send({msj : 'Hubo un error'});
         }  
     }

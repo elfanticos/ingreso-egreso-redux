@@ -4,23 +4,33 @@ const jwt    = require('jwt-simple'),
 
 
 global.ensureAuth = function(req, res, next) {
-    console.log(req.headers);
-        if(!req.headers.authorization) {
-          return res
-            .status(403)
-            .send({message: "Tu petición no tiene cabecera de autorización"});
+    let referer = null;
+    referer = req.headers.referer;
+    if(!referer) {
+        return res.status(global.HTTP_400).send({message: 'La petición no tiene referer', error: 2});
+    }
+    let char = '//';
+    let idx  = referer.indexOf(char);
+    referer  = referer.substring( (idx + char.length), referer.length);
+    referer  = referer.split('/')[1];
+    let token = (req.body.token) ? req.body.token : (req.query.token ? req.query.token : req.headers.authorization ? req.headers.authorization : null);
+    if(token == null) {
+        return res.status(global.HTTP_400).send({message: 'La petición no tiene la cabecera de autenticación', error: 2});
+    }
+    let payload = null;
+    token = token.replace(/['"]+/g,'');
+    try {
+        let segments = token.split('.');
+        if (segments.length !== 3) {
+            throw new Error('El token no tiene el formato correcto');
         }
-        
-        var token = req.headers.authorization.split(" ")[1];
-        var payload = jwt.decode(token, global.JWT_KEY);
-        
-        if(payload.exp <= moment().unix()) {
-           return res
-               .status(401)
-              .send({message: "El token ha expirado"});
+        payload = jwt.decode(token, JWT_KEY);
+        if(payload.exp == undefined || payload.exp <= moment().unix()){
+            //return res.status(200).send({message: 'Token ha expirado', error: 2});
         }
-        
-        req.user = payload.sub;
-        next();
-      }
-      
+    } catch (err) {
+        return res.status(global.HTTP_400).send({message: 'Token no válido', error: err});
+    }
+    req.user = payload;
+    next();
+}
