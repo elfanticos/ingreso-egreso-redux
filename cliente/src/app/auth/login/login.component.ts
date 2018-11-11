@@ -1,5 +1,3 @@
-import { Appstate } from './../../app.reducer';
-import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 /**SERVICIOS */
@@ -17,7 +15,6 @@ export class AppLoginComponent implements OnInit {
     constructor(
         private _formBuilder : FormBuilder,
         private _authService : AuthService,
-        private _store : Store<Appstate>
     ) {
         this.formLogin = this._formBuilder.group({
             'usuario' : [null, [Validators.required, Validators.maxLength(30)]],

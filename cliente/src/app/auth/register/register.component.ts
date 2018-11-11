@@ -12,9 +12,9 @@ export class AppRegisterComponent  {
     constructor(
         private _formBuilder : FormBuilder
     ) {
-        this.formLogin = this._formBuilder.group({
-            'usuario' : [null, [Validators.required, Validators.maxLength(30)]],
-            'clave'   : [null, [Validators.required,Validators.maxLength(10)]]
-        });
+        // this.formLogin = this._formBuilder.group({
+        //     'usuario' : [null, [Validators.required, Validators.maxLength(30)]],
+        //     'clave'   : [null, [Validators.required,Validators.maxLength(10)]]
+        // });
     }
 }
