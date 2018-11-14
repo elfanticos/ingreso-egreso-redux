@@ -10,7 +10,8 @@ import {
   MatButtonModule, 
   MatCheckboxModule,
   MatToolbarModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatCardModule
 } from '@angular/material';
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {
     MatButtonModule, 
     MatCheckboxModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatCardModule
   ],
   declarations: [
     FooterComponent,

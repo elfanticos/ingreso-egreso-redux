@@ -6,9 +6,7 @@
 /out-tsc
 
 # dependencies
-cliente/node_modules
-cliente-curso/node_modules
-servidor/node_modules
+/node_modules
 
 # IDEs and editors
 /.idea
