@@ -17,6 +17,11 @@ ng g c shared/navbar --spec=false -is
 ---SHARED / SIDEBAR
 ng g c shared/sidebar --spec=false -is
 
+
+---- INSTALAR DEPENDENCIAS
+"node_modules/bootstrap/dist/css/bootstrap.min.css"
+
+
 ---SERVICIOS
 ng g s auth/auth --spec=false
 ng g s ingreso-egreso/ingreso-egreso --spec=false
