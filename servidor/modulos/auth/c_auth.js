@@ -3,6 +3,20 @@
 const m_auth      = require('./m_auth'),
       jwt_service = require('../../config/jwt');
 
+async function crearUsuario(req,res) {
+    try {
+        let data_req = req.body;
+        let data =  await m_auth.crearUsuario(data_req);
+        res.status(200).send(data);
+    } catch (err) {
+        console.log(err);
+        if(err.status) {
+            res.status(err.status).send(err);
+        } else {
+            res.status(500).send({msj : 'Hubo un error'});
+        }
+    }
+}
 async function login(req,res) {
     try {
         let data_req = req.query;
@@ -39,5 +53,6 @@ async function validatorToken(req, res) {
 
 module.exports = {
     login,
-    validatorToken
+    validatorToken,
+    crearUsuario
 };
