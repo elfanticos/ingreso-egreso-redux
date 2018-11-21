@@ -6,7 +6,7 @@ export class User {
     public nro_documento : string;
     public foto_persona  : string;
     
-    constructor(obj:DataObj) {
+    constructor(obj?:DataObj) {
         this.id_persona    = obj && obj.id_persona    || null;
         this.nom_persona   = obj && obj.nom_persona   || null;
         this.ape_pate_pers = obj && obj.ape_pate_pers || null;

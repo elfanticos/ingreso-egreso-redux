@@ -24,6 +24,7 @@ ng g c shared/sidebar --spec=false -is
 
 ---SERVICIOS
 ng g s auth/auth --spec=false
+ng g s auth/authGuard --spec=false
 ng g s ingreso-egreso/ingreso-egreso --spec=false
 
 ---PIPE

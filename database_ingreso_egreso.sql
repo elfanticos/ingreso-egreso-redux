@@ -34,3 +34,26 @@ ALTER TABLE public.persona
 
 --EXTENSION PARA QUITAR ACENTO
 CREATE EXTENSION unaccent;
+
+--CREAR TABLA PARA EL INGRESO Y EGRESO
+-- Table: public.movimiento
+
+-- DROP TABLE public.movimiento;
+
+CREATE TABLE public.movimiento
+(
+    id integer NOT NULL DEFAULT nextval('movimiento_id_seq'::regclass),
+    descripcion character varying(120) COLLATE pg_catalog."default",
+    monto numeric(8,2),
+    tipo character varying(60) COLLATE pg_catalog."default",
+    _id_persona integer,
+    CONSTRAINT movimiento_pkey PRIMARY KEY (id),
+    CONSTRAINT fk__id_persona FOREIGN KEY (_id_persona)
+        REFERENCES public.persona (id_persona) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;

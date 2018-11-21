@@ -8,5 +8,4 @@ router
 	.get('/login', c_auth.login)
 	.get('/validatorToken', global.ensureAuth, c_auth.validatorToken)
 	.post('/crearUsuario', c_auth.crearUsuario)
-
 module.exports = router;
