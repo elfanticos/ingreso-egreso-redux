@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 /**NGRX */
 import {StoreModule} from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 /**Componentes */
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { appReducers } from './app.reducer';
+import { movimientosEffects } from './ingreso-egreso/ingreso-egreso.effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,10 +46,11 @@ import { appReducers } from './app.reducer';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([movimientosEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
-    })
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

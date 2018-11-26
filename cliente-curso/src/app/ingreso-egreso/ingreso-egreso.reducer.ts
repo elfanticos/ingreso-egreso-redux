@@ -26,6 +26,10 @@ export function ingresoEgresoReducer(state = estadoInicial, action:fromIngresoEg
             return {
                 items : []
             }
+        case fromIngresoEgreso.ITEMS_MOV:
+            return state;
+            case fromIngresoEgreso.ITEMS_MOV_CHANGE:
+            return state;
         default:
             return state;
     }

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { filter, map } from 'rxjs/operators';
+import { ItemsMovAction } from '../ingreso-egreso/ingreso-egreso.action';
 
 @Component({
   selector: 'app-dashboard',

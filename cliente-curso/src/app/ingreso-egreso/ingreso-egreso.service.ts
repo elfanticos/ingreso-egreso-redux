@@ -44,6 +44,9 @@ export class IngresoEgresoService implements OnInit, OnDestroy {
         .set('token' , localStorage.getItem('token'))
         .set('id_persona' , id_persona);
     this._httpClient.get(this.url+'getIngresoEgresos', {params : params}).subscribe((res:any) => {
+      if (res && res.length > 0) {
+        res.map(row => row.monto = parseFloat(row.monto));
+      }
       this._store.dispatch(new SetItemsAction(res));
     },err => {
       this._store.dispatch(new UnSetItemsAction());

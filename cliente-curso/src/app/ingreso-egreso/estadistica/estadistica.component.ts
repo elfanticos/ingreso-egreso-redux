@@ -36,7 +36,6 @@ export class EstadisticaComponent implements OnInit, OnDestroy {
 
     this.cuantosEgresos  = 0;
     this.cuantosIngresos = 0;
-
     items.forEach(item => {
       if (item.tipo == 'INGRESO') {
         this.cuantosIngresos++;

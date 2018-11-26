@@ -5,6 +5,7 @@ import { AppState } from '../app.reducer';
 import { Store } from '@ngrx/store';
 import { IngresoEgreso } from './ingreso-egreso.model';
 import { IngresoEgresoService } from './ingreso-egreso.service';
+import { ItemsMovAction } from './ingreso-egreso.action';
 
 @Component({
   selector: 'app-ingreso-egreso',
@@ -43,6 +44,8 @@ export class IngresoEgresoComponent implements OnInit, OnDestroy {
   }
 
   registrarIngresoEgreso():void {
+    this._store.dispatch(new ItemsMovAction());
+    return;
     this._ingresoEgresoService.insertIngresoEgreso(this.form.value);
 
   }
