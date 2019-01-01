@@ -44,8 +44,7 @@ export class IngresoEgresoComponent implements OnInit, OnDestroy {
   }
 
   registrarIngresoEgreso():void {
-    this._store.dispatch(new ItemsMovAction());
-    return;
+    // this._store.dispatch(new ItemsMovAction());
     this._ingresoEgresoService.insertIngresoEgreso(this.form.value);
 
   }
